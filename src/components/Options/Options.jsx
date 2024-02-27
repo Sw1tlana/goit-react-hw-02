@@ -1,11 +1,23 @@
 import css from './Options.module.css';
-const Options = ({ feedbackCounts}) => {
+const Options = ({ updateFeedback, totalFeedback, resetFeedback }) => {
   
     return (
         <div className={css.optionsContainerBtn}>
-            <button type="button" className={css.optionsButton}>{feedbackCounts.good}</button>
-            <button type="button" className={css.optionsButton}>{feedbackCounts.neutral}</button>
-            <button type="button" className={css.optionsButton}>{feedbackCounts.bad}</button>
+        <ul>
+            <li>
+              <button type="button" className={css.optionsButton} onClick={() => updateFeedback('good')}>Good</button>
+            </li>
+            <li>
+              <button type="button" className={css.optionsButton} onClick={() => updateFeedback('neutral')}>Neutral</button>
+            </li>
+            <li>
+              <button type="button" className={css.optionsButton} onClick={() => updateFeedback('bad')}>Bad</button>
+            </li>
+            {totalFeedback > 0 && (
+            <li>
+              <button type="button" className={css.optionsButton} onClick={resetFeedback}>Reset</button>
+            </li>)}
+            </ul>
         </div>
         
     )
