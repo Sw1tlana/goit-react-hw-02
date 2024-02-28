@@ -33,8 +33,8 @@ const updateFeedback = feedbackType => {
 
   return (
     <div className={css.container}>
-    <h1>Sip Happens Café</h1>
-      <p>Please leave your feedback about our service by selecting one of the options below.</p>
+    <h1 className={css.heroTitle}>Sip Happens Café</h1>
+      <p className={css.heroText}>Please leave your feedback about our service by selecting one of the options below.</p>
       <Options updateFeedback={updateFeedback} totalFeedback={totalFeedback} resetFeedback={resetFeedback}/>
       {totalFeedback > 0 ? <Feedback feedbackCounts={feedbackCounts} positivePercentage={positivePercentage} totalFeedback={totalFeedback}/> : <Notification message="No feedback yet."/>}  
     </div>

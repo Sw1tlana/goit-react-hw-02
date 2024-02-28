@@ -3,7 +3,7 @@ const Options = ({ updateFeedback, totalFeedback, resetFeedback }) => {
   
     return (
         <div className={css.optionsContainerBtn}>
-        <ul>
+        <ul className={css.listOptionBtn}>
             <li>
               <button type="button" className={css.optionsButton} onClick={() => updateFeedback('good')}>Good</button>
             </li>
