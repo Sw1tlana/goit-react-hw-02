@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import "modern-normalize";
 import Feedback from './components/Feedback/Feedback';
 import Options from './components/Options/Options';
@@ -6,18 +6,26 @@ import Notification from './components/Notification/Notification';
 import css from './App.module.css';
 
 function App() {
-const [feedbackCounts, setFeedbackCounts] = useState({
+const initialFeedbackCounts = JSON.parse(localStorage.getItem('feedbackCounts')) || {
   good: 0,
   neutral: 0,
   bad: 0
-});
+}
 
-const updateFeedback = feedbackType => {
-  setFeedbackCounts(prevState => ({
-    ...prevState,
-  [feedbackType]: prevState[feedbackType] + 1
-  }));
+const [feedbackCounts, setFeedbackCounts] = useState(initialFeedbackCounts);
+
+useEffect(() => {
+ localStorage.setItem('feedbackCounts', JSON.stringify(feedbackCounts)); 
+}, [feedbackCounts]);
+
+
+const updateFeedback = (feedbackType) => {
+  setFeedbackCounts({
+    ...feedbackCounts,
+  [feedbackType]: feedbackCounts[feedbackType] + 1
+  });
  };
+
 
  const { good, neutral, bad } = feedbackCounts;
  const totalFeedback = good + neutral + bad;
@@ -35,8 +43,15 @@ const updateFeedback = feedbackType => {
     <div className={css.container}>
     <h1 className={css.heroTitle}>Sip Happens Café</h1>
       <p className={css.heroText}>Please leave your feedback about our service by selecting one of the options below.</p>
-      <Options updateFeedback={updateFeedback} totalFeedback={totalFeedback} resetFeedback={resetFeedback}/>
-      {totalFeedback > 0 ? <Feedback feedbackCounts={feedbackCounts} positivePercentage={positivePercentage} totalFeedback={totalFeedback}/> : <Notification message="No feedback yet."/>}  
+      <Options 
+      updateFeedback={updateFeedback} 
+      totalFeedback={totalFeedback} 
+      resetFeedback={resetFeedback}/>
+      {totalFeedback > 0 ? 
+      <Feedback 
+      feedbackCounts={feedbackCounts} 
+      positivePercentage={positivePercentage} 
+      totalFeedback={totalFeedback}/> : <Notification message="No feedback yet."/>}  
     </div>
   )
 }
