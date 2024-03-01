@@ -1,0 +1,12 @@
+.hero-title {
+    font-size: 30px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: var(--text-dark );
+}
+
+.hero-text {
+    font-size: 18px;
+    color: var(--black-background);
+}

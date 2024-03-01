@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import "modern-normalize";
+import Description from './components/Description/Description';
 import Feedback from './components/Feedback/Feedback';
 import Options from './components/Options/Options';
 import Notification from './components/Notification/Notification';
@@ -18,14 +19,12 @@ useEffect(() => {
  localStorage.setItem('feedbackCounts', JSON.stringify(feedbackCounts)); 
 }, [feedbackCounts]);
 
-
 const updateFeedback = (feedbackType) => {
   setFeedbackCounts({
     ...feedbackCounts,
   [feedbackType]: feedbackCounts[feedbackType] + 1
   });
  };
-
 
  const { good, neutral, bad } = feedbackCounts;
  const totalFeedback = good + neutral + bad;
@@ -41,8 +40,7 @@ const updateFeedback = (feedbackType) => {
 
   return (
     <div className={css.container}>
-    <h1 className={css.heroTitle}>Sip Happens Café</h1>
-      <p className={css.heroText}>Please leave your feedback about our service by selecting one of the options below.</p>
+      <Description/>
       <Options 
       updateFeedback={updateFeedback} 
       totalFeedback={totalFeedback} 
